@@ -1,0 +1,30 @@
+Семён Маслов
+Семён Маслов
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Статьи</h2>
+
+    {% for post in posts %}
+        <article class="post">
+            <h3>{{ post.title }}</h3>
+
+            {% if post.image %}
+                <img
+                    src="{{ post.image.url }}"
+                    alt="{{ post.title }}"
+                    style="display: block; width: 100%; max-width: 400px; height: auto; border-radius: 8px;"
+                >
+            {% endif %}
+
+            <div class="post-content">
+                {{ post.content|linebreaks }}
+            </div>
+
+            <small>{{ post.created_at|date:"d.m.Y H:i" }}</small>
+        </article>
+        <hr>
+    {% empty %}
+        <p>Пока нет статей.</p>
+    {% endfor %}
+{% endblock %}
